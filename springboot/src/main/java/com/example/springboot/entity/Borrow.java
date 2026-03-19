@@ -1,0 +1,28 @@
+package com.example.springboot.entity;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.util.Date;
+@Data
+public class Borrow {
+    private Integer id;
+    private String bookName;
+    private String bookNo;
+    private Integer userId;
+    private String userName;
+    private String userPhone;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private LocalDate createtime;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    private LocalDate updatetime;
+    private Integer number1;
+    private Integer number2;
+    private String status;
+    private Integer days;
+    private LocalDate returnDate;
+    private String note;
+
+
+}

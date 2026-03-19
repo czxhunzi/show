@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboot.mapper.AppointMapper">
+    <insert id="save">
+        insert into appoint(book_no, book_name, user_id, user_name, user_phone, number)
+        values(#{bookNo}, #{bookName}, #{userId}, #{userName}, #{userPhone}, #{number})
+    </insert>
+    <update id="update">
+        update  appoint set book_no = #{bookNo}, book_name = #{bookName}, user_id = #{userId}, user_phone = #{userPhone}, number = #{number}, updatetime = #{updatetime} where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from appoint where id = #{id}
+    </delete>
+    <select id="getById" resultType="com.example.springboot.entity.Appoint">
+        select * from appoint where id = #{id}
+    </select>
+    <select id="list" resultType="com.example.springboot.entity.Appoint">
+        select * from appoint
+    </select>
+    <select id="listByCondition" resultType="com.example.springboot.entity.Appoint">
+        select * from appoint
+        <where>
+            <if test="bookName != null and bookName != ''">
+                book_name like concat('%', #{ bookName },'%')
+            </if>
+            <if test="bookNo != null and bookNo != ''">
+                and book_no like concat('%', #{ bookNo },'%')
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%', #{ userName },'%')
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>
